@@ -2,14 +2,13 @@
 
 namespace Php\Exam;
 
-require 'loggerInterface.php';
 use Psr\Log\LoggerInterface;
 
 class Logger implements LoggerInterface
 {
     private $pdo;
 
-    public function __construct()
+    public function __construct($message, array $context = array())
     {
         $pdo = new \PDO('sqlite:syslog.sqlite3');
         $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
@@ -23,38 +22,42 @@ class Logger implements LoggerInterface
         $this->pdo = $pdo;
     }
 
-    public function debug($msg)
+    public function emergency(){}
+    public function alert($message, array $context = array()){}
+    public function critical($message, array $context = array())
     {
-        $this->insert('debug', $msg);
-        echo "debug " . $msg . PHP_EOL;
+        $this->insert('critical', $message);
+        echo 'critical ' . $message . PHP_EOL;
     }
-    public function info($msg)
+    public function error($message, array $context = array())
     {
-        $this->insert('info', $msg);
-        echo "info " . $msg . PHP_EOL;
+        $this->insert('error', $message);
+        echo 'error ' . $message . PHP_EOL;
     }
-    public function notice($msg)
+    public function warning($message, array $context = array()){}
+    public function notice($message, array $context = array())
     {
-        $this->insert('notice', $msg);
-        echo "notice " . $msg . PHP_EOL;
+        $this->insert('notice', $message);
+        echo "notice " . $message . PHP_EOL;
     }
-    public function critical($msg)
+    public function info($message, array $context = array())
     {
-        $this->insert('critical', $msg);
-        echo 'critical ' . $msg . PHP_EOL;
+        $this->insert('info', $message);
+        echo "info " . $message . PHP_EOL;
     }
-    public function error($msg)
+    public function debug($message, array $context = array())
     {
-        $this->insert('error', $msg);
-        echo 'error ' . $msg . PHP_EOL;
+        $this->insert('debug', $message);
+        echo "debug " . $message . PHP_EOL;
     }
-
-    private function insert($funcName, $msg)
+    public function log($level, $message, array $context = array()){}
+    
+    private function insert($funcName, $message)
     {
         $insert = "INSERT INTO logs (level, message) VALUES (:level, :message)";
         $stmr = $this->pdo->prepare($insert);
         $stmr->bindValue(':level', $funcName);
-        $stmr->bindValue(':message', $msg);
+        $stmr->bindValue(':message', $message);
         $stmr->execute();
     }
 }
