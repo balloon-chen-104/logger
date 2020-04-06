@@ -6,5 +6,10 @@
             "email": "balloon.chen@104.com.tw"
         }
     ],
-    "require": {}
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Php\\Exam\\": "src/"
+        }
+    }
 }
