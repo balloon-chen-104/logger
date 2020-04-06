@@ -22,7 +22,7 @@ class Logger implements LoggerInterface
         $this->pdo = $pdo;
     }
 
-    public function emergency(){}
+    public function emergency($message, array $context = array()){}
     public function alert($message, array $context = array()){}
     public function critical($message, array $context = array())
     {
