@@ -8,7 +8,7 @@ class Logger implements LoggerInterface
 {
     private $pdo;
 
-    public function __construct($message, array $context = array())
+    public function __construct()
     {
         $pdo = new \PDO('sqlite:syslog.sqlite3');
         $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
