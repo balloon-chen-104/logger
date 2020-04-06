@@ -1,6 +1,6 @@
 {
     "name": "balloon-chen-104/logger",
-    "description": "implement a logger class for the exam",
+    "description": "Create a class named Logger which implement the LoggerInterface interface.",
     "authors": [
         {
             "name": "balloon.chen",

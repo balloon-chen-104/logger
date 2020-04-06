@@ -22,8 +22,12 @@ class Logger implements LoggerInterface
         $this->pdo = $pdo;
     }
 
-    public function emergency($message, array $context = array()){}
-    public function alert($message, array $context = array()){}
+    public function emergency($message, array $context = array())
+    {
+    }
+    public function alert($message, array $context = array())
+    {
+    }
     public function critical($message, array $context = array())
     {
         $this->insert('critical', $message);
@@ -34,7 +38,9 @@ class Logger implements LoggerInterface
         $this->insert('error', $message);
         echo 'error ' . $message . PHP_EOL;
     }
-    public function warning($message, array $context = array()){}
+    public function warning($message, array $context = array())
+    {
+    }
     public function notice($message, array $context = array())
     {
         $this->insert('notice', $message);
@@ -50,7 +56,9 @@ class Logger implements LoggerInterface
         $this->insert('debug', $message);
         echo "debug " . $message . PHP_EOL;
     }
-    public function log($level, $message, array $context = array()){}
+    public function log($level, $message, array $context = array())
+    {
+    }
     
     private function insert($funcName, $message)
     {
